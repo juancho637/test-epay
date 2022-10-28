@@ -17,6 +17,8 @@ class StoreUser
     {
         $this->user = $this->user->create($fields);
 
+        $this->user->wallet()->create();
+
         return $this->user;
     }
 }
