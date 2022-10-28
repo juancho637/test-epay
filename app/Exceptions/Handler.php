@@ -55,5 +55,13 @@ class Handler extends ExceptionHandler
                 return $this->jsonResponse($errors, Response::HTTP_UNPROCESSABLE_ENTITY, false);
             }
         });
+
+        $this->renderable(function (\Exception $e, $request) {
+            if ($request->is('api/*')) {
+                $code = ($e->getCode() !== 0) ? $e->getCode() : Response::HTTP_BAD_REQUEST;
+
+                return $this->jsonResponse($e->getMessage(), $code, false);
+            }
+        });
     }
 }
