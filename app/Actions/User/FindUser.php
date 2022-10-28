@@ -5,7 +5,7 @@ namespace App\Actions\User;
 use App\Models\User;
 use Illuminate\Http\Response;
 
-class FindUserWallet
+class FindUser
 {
     private $user;
 
@@ -22,11 +22,9 @@ class FindUserWallet
             ->first();
 
         if (!$this->user) {
-            throw new \Exception("Wallet not found", Response::HTTP_NOT_FOUND);
+            throw new \Exception("User not found", Response::HTTP_NOT_FOUND);
         }
 
-        $this->user->load(['wallet']);
-
-        return $this->user->wallet;
+        return $this->user;
     }
 }
