@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Auth;
+namespace App\Http\Controllers\Api\Wallet;
 
 use App\Actions\Wallet\FindWalletByUser;
 use App\Http\Controllers\Api\ApiController;
