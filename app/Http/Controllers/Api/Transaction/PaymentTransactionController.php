@@ -18,6 +18,7 @@ class PaymentTransactionController extends ApiController
                 $request->phone,
                 $request->amount,
             );
+            DB::commit();
 
             return $this->jsonResponse($transaction);
         } catch (\Exception $exception) {
