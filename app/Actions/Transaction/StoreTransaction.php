@@ -18,9 +18,15 @@ class StoreTransaction
         Wallet $wallet,
         int $amount,
         string $type = Transaction::TYPE_INCOM,
-        string $status = Transaction::STATUS_ENABLED,
-        int $code = null
     ) {
+        $status = Transaction::STATUS_ENABLED;
+        $code = null;
+
+        if ($type === Transaction::TYPE_EGRESS) {
+            $status = Transaction::STATUS_PENDING;
+            $code = rand(111111, 999999);
+        }
+
         $this->transaction = $this->transaction->create([
             'wallet_id' => $wallet->id,
             'value' => $amount,

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('identification')->unique();
             $table->string('email')->unique();
             $table->unsignedInteger('phone')->unique();
+            $table->string('token', 10)->nullable();
             $table->timestamps();
         });
     }
