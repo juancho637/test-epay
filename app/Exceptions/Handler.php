@@ -6,7 +6,10 @@ use Throwable;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -53,6 +56,24 @@ class Handler extends ExceptionHandler
                 $errors = $e->validator->errors()->getMessages();
 
                 return $this->jsonResponse($errors, Response::HTTP_UNPROCESSABLE_ENTITY, false);
+            }
+        });
+
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if ($request->is('api/*')) {
+                return $this->jsonResponse('Not found', Response::HTTP_NOT_FOUND, false);
+            }
+        });
+
+        $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
+            if ($request->is('api/*')) {
+                return $this->jsonResponse('Method not allowed', Response::HTTP_METHOD_NOT_ALLOWED, false);
+            }
+        });
+
+        $this->renderable(function (ModelNotFoundException $e, $request) {
+            if ($request->is('api/*')) {
+                return $this->jsonResponse('Model not found', Response::HTTP_NOT_FOUND, false);
             }
         });
 
