@@ -46,7 +46,7 @@ class ConfirmTransactionNotification extends Notification
     {
         return (new MailMessage)
             ->line('Link to confirm your payment.')
-            ->action('Confirm', url("/?token={$this->userToken}&code={$this->transactionCode}"));
+            ->action('Confirm', url("/api/v1/transactions/confirm?token={$this->userToken}&code={$this->transactionCode}"));
     }
 
     /**
