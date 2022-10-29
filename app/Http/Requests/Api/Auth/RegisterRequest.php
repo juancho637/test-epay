@@ -4,6 +4,16 @@ namespace App\Http\Requests\Api\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     required={
+ *         "identification",
+ *         "name",
+ *         "email",
+ *         "phone"
+ *     },
+ * )
+ */
 class RegisterRequest extends FormRequest
 {
     /**
@@ -17,9 +27,10 @@ class RegisterRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
+     * @OA\Property(type="number", description="identification", property="identification"),
+     * @OA\Property(type="string", description="name", property="name"),
+     * @OA\Property(type="string", description="email", property="email"),
+     * @OA\Property(type="number", description="phone", property="phone"),
      */
     public function rules()
     {
