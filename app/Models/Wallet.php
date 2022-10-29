@@ -13,8 +13,17 @@ class Wallet extends Model
         'value',
     ];
 
+    protected $casts = [
+        'value' => 'decimal:2',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }
