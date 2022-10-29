@@ -9,6 +9,33 @@ use App\Http\Requests\Api\Transaction\PaymentTransactionRequest;
 
 class PaymentTransactionController extends ApiController
 {
+    /**
+     * @OA\Post(
+     *     path="/api/v1/transactions/payment",
+     *     summary="Init payment transaction",
+     *     tags={"Transaction"},
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref="#/components/schemas/PaymentTransactionRequest",
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="success",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="string"
+     *             ),
+     *         ),
+     *     ),
+     * )
+     */
     public function __invoke(PaymentTransactionRequest $request)
     {
         DB::beginTransaction();

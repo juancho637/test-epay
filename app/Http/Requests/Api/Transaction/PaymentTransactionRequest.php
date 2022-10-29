@@ -4,6 +4,15 @@ namespace App\Http\Requests\Api\Transaction;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     required={
+ *         "amount",
+ *         "identification",
+ *         "phone"
+ *     },
+ * )
+ */
 class PaymentTransactionRequest extends FormRequest
 {
     /**
@@ -17,9 +26,9 @@ class PaymentTransactionRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
+     * @OA\Property(type="number", description="amount", property="amount"),
+     * @OA\Property(type="number", description="identification", property="identification"),
+     * @OA\Property(type="number", description="phone", property="phone"),
      */
     public function rules()
     {
